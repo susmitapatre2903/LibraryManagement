@@ -1,7 +1,5 @@
 @LibraryManagement.Api_HostAddress = https://localhost:7168
-@Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJMaWJyYXJ5TWFuYWdlbWVudC5DbGllbnQiLCJpc3MiOiJMaWJyYXJ5TWFuYWdlbWVudC5BcGkiLCJleHAiOjE3OTE0NjEwMTEsInN1YiI6IjEiLCJuYW1lIjoiYWRtaW4iLCJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3OTE0NTc0MTEsIm5iZiI6MTc5MTQ1NzQxMX0.KxgIEBUkkixVI1NXR18dV1B8sA6GSdXiJnKD-IKwLLU
- 
-
+@Token: "JWT Token"
 ###
 GET {{LibraryManagement.Api_HostAddress}}/api/books
 Accept: application/json
@@ -9,7 +7,7 @@ Accept: application/json
 ###
 POST {{LibraryManagement.Api_HostAddress}}/api/auth/login
 Content-Type: application/json
-
+Authorization: Bearer {{Token}}
 {
   "username": "admin",
   "password": "Admin@123"
@@ -38,10 +36,10 @@ Authorization: Bearer {{Token}}
 
 ###
 DELETE {{LibraryManagement.Api_HostAddress}}/api/books/3
-Authorization: Bearer {{Token}}
+
 ###
 GET {{LibraryManagement.Api_HostAddress}}/api/users
-Authorization: Bearer {{Token}}
+
 
 ###
 POST {{LibraryManagement.Api_HostAddress}}/api/users
