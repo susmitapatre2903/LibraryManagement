@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using LibraryManagement.Api.Data;
+﻿using LibraryManagement.Api.Data;
 using LibraryManagement.Api.Models;
 using LibraryManagement.Api.Services;
 using Microsoft.AspNetCore.Identity;
