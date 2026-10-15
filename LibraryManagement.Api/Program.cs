@@ -17,8 +17,10 @@ builder.Services.AddDbContext<LibraryContext>(options =>
         builder.Configuration.GetConnectionString("Default"),
         sql => sql.EnableRetryOnFailure()));
 
+var corsOrigins = builder.Configuration.GetSection("Cors:Origins").Get<string[]>()
+                  ?? new[] { "http://localhost:5173" };
 builder.Services.AddCors(options => options.AddPolicy("react", policy =>
-    policy.WithOrigins("http://localhost:5173")
+    policy.WithOrigins(corsOrigins)
           .AllowAnyHeader()
           .AllowAnyMethod()));
 
@@ -48,21 +50,22 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Create the two starter users if the table is empty (development only)
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<LibraryContext>();
-    if (!db.Users.Any())
+    db.Database.Migrate();
+
+    var adminName = builder.Configuration["Seed:AdminUsername"];
+    var adminPassword = builder.Configuration["Seed:AdminPassword"];
+
+    if (!db.Users.Any()
+        && !string.IsNullOrWhiteSpace(adminName)
+        && !string.IsNullOrWhiteSpace(adminPassword))
     {
         var hasher = new PasswordHasher<User>();
-
-        var admin = new User { Username = "admin", Role = "Admin" };
-        admin.PasswordHash = hasher.HashPassword(admin, "Admin@123");
-
-        var librarian = new User { Username = "librarian", Role = "Librarian" };
-        librarian.PasswordHash = hasher.HashPassword(librarian, "Librarian@123");
-
-        db.Users.AddRange(admin, librarian);
+        var admin = new User { Username = adminName, Role = "Admin" };
+        admin.PasswordHash = hasher.HashPassword(admin, adminPassword);
+        db.Users.Add(admin);
         db.SaveChanges();
     }
 }
