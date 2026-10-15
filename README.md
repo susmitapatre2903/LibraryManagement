@@ -1,22 +1,26 @@
 # Library Management System
 
-A full-stack library management app: staff log in, manage books and members, and track loans.
+A full-stack web app to manage a library's books, members and loans, with login and role-based access. It's deployed on Azure.
+**Live demo:** https://happy-forest-0a52c2b00.1.azurestaticapps.net
 
 ## Features
-- JWT authentication with **Admin** and **Librarian** roles
 - Books: create, edit, delete, list (Admin edits; Librarian views)
 - Members: create, edit, list (Admin can delete)
 - Loans: borrow and return with automatic copy counts, due dates, and overdue status
-- User management (Admin only)
+- JWT authentication with **Admin** and **Librarian** roles
+- Admin-only user management: Create and delete users
 - Server-side validation and clear error messages
 
 ## Tech stack
 | Layer | Technology |
 |---|---|
+| Frontend | React (Vite), React Router, axios, Context API |
 | Backend | ASP.NET Core Web API (.NET 10), C# |
-| Data | Entity Framework Core, SQL Server |
+| Data | Entity Framework Core, SQL Server , Azure SQL|
 | Auth | JWT bearer tokens, role-based authorization, hashed passwords |
-| Frontend | React (Vite), React Router, axios |
+| Hosting | Azure Static web Apps(frontend), Azure App Service(API) |
+| CI/CD | GitHub Actions deploys the frontend on every push |
+
 
 ## Run locally
 **Requirements:** .NET 10 SDK, Node.js 22+, SQL Server LocalDB
@@ -38,7 +42,7 @@ LibraryManagement.Api/   Controllers, Models, Data (DbContext, Migrations), Serv
 library-client/          React app (pages, auth context, axios setup)
 ```
 
-## Roadmap
+## Next steps
 - Unit and integration tests
-- Service layer
-- Deployment to Azure (App Service, Azure SQL, Static Web Apps)
+- Pagination and search
+- Logging and monitoring with Application Insights
