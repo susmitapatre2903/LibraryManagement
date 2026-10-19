@@ -10,7 +10,7 @@ Content-Type: application/json
 Authorization: Bearer {{Token}}
 {
   "username": "admin",
-  "password": "Admin@123"
+  "password": "Your_Password"
 }
 
 ###
@@ -19,7 +19,7 @@ Content-Type: application/json
 Authorization: Bearer {{Token}}
 {
   "username": "librarian",
-  "password": "Librarian@123"
+  "password": "Your_Password"
 }
 ###
 
