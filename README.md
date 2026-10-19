@@ -2,6 +2,8 @@
 
 A full-stack web app to manage a library's books, members and loans, with login and role-based access. It's deployed on Azure.
 **Live demo:** https://happy-forest-0a52c2b00.1.azurestaticapps.net
+UserName :Librarian 
+Password :Lib@1234
 
 ## Features
 - Books: create, edit, delete, list (Admin edits; Librarian views)
